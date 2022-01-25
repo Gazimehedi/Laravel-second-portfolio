@@ -12,6 +12,7 @@ use App\Http\Controllers\PortfolioController;
 
 Route::get('/', [FrontendController::class, 'home']);
 Route::get('/contact', [FrontendController::class, 'contact'])->name('contact');
+Route::post('/contact/message/sent', [FrontendController::class, 'messagesent'])->name('message.sent');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('backend.dashboard');
@@ -53,4 +54,5 @@ Route::group(['middleware'=>'auth','prefix'=>'admin'],function(){
     Route::get('/contact/profile',[ContactController::class,'profile'])->name('admin.contact.profile');
     Route::put('/about/update/',[ContactController::class,'profileupdate'])->name('admin.contact.profileupdate');
     Route::get('/contact/message',[ContactController::class,'message'])->name('admin.contact.message');
+    Route::get('/contact/message/delete/{id}',[ContactController::class,'messagedelete'])->name('admin.contect.message.delete');
 });
