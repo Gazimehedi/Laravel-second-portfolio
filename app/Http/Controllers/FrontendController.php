@@ -14,4 +14,8 @@ class FrontendController extends Controller
         $brands = DB::table('brands')->latest()->get();
         return view('index',compact(['about','services','portfolios','brands']));
     }
+    public function contact(){
+        $contact = DB::table('contacts')->first();
+        return view('pages.contact',compact('contact'));
+    }
 }

@@ -4,12 +4,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BrandController;
-use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\SliderController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\PortfolioController;
 
 Route::get('/', [FrontendController::class, 'home']);
+Route::get('/contact', [FrontendController::class, 'contact'])->name('contact');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('backend.dashboard');
@@ -47,4 +49,8 @@ Route::group(['middleware'=>'auth','prefix'=>'admin'],function(){
     Route::get('/portfolio/edit/{id}',[PortfolioController::class,'edit'])->name('admin.portfolio.edit');
     Route::put('/portfolio/update/{id}',[PortfolioController::class,'update'])->name('admin.portfolio.update');
     Route::get('/portfolio/delete/{id}',[PortfolioController::class,'delete'])->name('admin.portfolio.delete');
+// Contact Routes //
+    Route::get('/contact/profile',[ContactController::class,'profile'])->name('admin.contact.profile');
+    Route::put('/about/update/',[ContactController::class,'profileupdate'])->name('admin.contact.profileupdate');
+    Route::get('/contact/message',[ContactController::class,'message'])->name('admin.contact.message');
 });
