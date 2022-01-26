@@ -73,6 +73,14 @@
                             </a>
                         </div>
                     </div>
+                    @if (session()->has('success'))
+                        <div class="alert alert-dismissible fade show alert-success" role="alert">
+                            {{session('success')}}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                    @endif
                     <div class="card-body p-5">
 
                         <h4 class="text-dark mb-5">Sign In</h4>

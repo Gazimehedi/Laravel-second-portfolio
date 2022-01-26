@@ -101,6 +101,9 @@
                             </a>
                         </li>
                         <li>
+                            <a href="{{route('user.password.reset')}}"> <i class="mdi mdi-settings"></i> Change Password </a>
+                        </li>
+                        <li>
                             <a href="#"> <i class="mdi mdi-diamond-stone"></i> Projects </a>
                         </li>
                         <li>

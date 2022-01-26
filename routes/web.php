@@ -17,8 +17,12 @@ Route::post('/contact/message/sent', [FrontendController::class, 'messagesent'])
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('backend.dashboard');
 })->name('dashboard');
-Route::get('/user/logout',[AdminController::class,'logout'])->name('user.logout');
 Route::group(['middleware'=>'auth','prefix'=>'admin'],function(){
+// AdminRoutes
+    Route::get('/logout',[AdminController::class,'logout'])->name('user.logout');
+    //Password Reset Routes
+    Route::get('/password/reset',[AdminController::class,'passwordreset'])->name('user.password.reset');
+    Route::put('/password/update',[AdminController::class,'passwordupdate'])->name('user.password.update');
 
 // Brand Routes //
     Route::get('/brand',[BrandController::class,'index'])->name('admin.brand');
