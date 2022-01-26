@@ -32,4 +32,28 @@ class AdminController extends Controller
             return redirect()->route('user.password.reset')->with('warning','Your password is wrong!');
         }
     }
+    public function profile(){
+        return view('backend.profile.profile');
+    }
+    public function profileupdate(Request $request){
+        $request->validate([
+            'image'=>'required|image|mimes:png,jpg,jpeg',
+            'name'=>'required',
+            'email'=>'required|email'
+        ]);
+        $user = User::find(Auth::id());
+        if($request->hasFile('image')){
+            $img = $request->file('image');
+            $path = 'storage/profile/';
+            $ext = $img->getClientOriginalExtension();
+            $file_name = 'profile_'.time().'.'.$ext;
+            $image = $path.$file_name;
+            $img->move($path,$file_name);
+            $user->profile_photo_path = $image;
+        }
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->save();
+        return redirect()->route('user.profile')->with('success','Your Profile Is Updated!');
+    }
 }

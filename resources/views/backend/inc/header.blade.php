@@ -78,7 +78,7 @@
                 <!-- User Account -->
                 <li class="dropdown user-menu">
                     <button href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                        <img src="{{ asset('backend/assets') }}/img/user/user.png"
+                        <img src="{{ Auth::user()->profile_photo_path == null ? asset('backend/assets/img/user/user.png') : asset(Auth::user()->profile_photo_path) }}"
                             class="user-image" alt="User Image" />
                         <span class="d-none d-lg-inline-block">{{Auth::user()->name}}</span>
                     </button>
@@ -91,7 +91,7 @@
                         </li>
 
                         <li>
-                            <a href="{{ route('profile.show') }}">
+                            <a href="{{ route('user.profile') }}">
                                 <i class="mdi mdi-account"></i> My Profile
                             </a>
                         </li>

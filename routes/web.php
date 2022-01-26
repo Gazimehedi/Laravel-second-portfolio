@@ -23,6 +23,9 @@ Route::group(['middleware'=>'auth','prefix'=>'admin'],function(){
     //Password Reset Routes
     Route::get('/password/reset',[AdminController::class,'passwordreset'])->name('user.password.reset');
     Route::put('/password/update',[AdminController::class,'passwordupdate'])->name('user.password.update');
+    //Profile Routes
+    Route::get('/profile',[AdminController::class,'profile'])->name('user.profile');
+    Route::put('/profile/update',[AdminController::class,'profileupdate'])->name('user.profile.update');
 
 // Brand Routes //
     Route::get('/brand',[BrandController::class,'index'])->name('admin.brand');
