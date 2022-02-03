@@ -30,7 +30,11 @@ class ServiceController extends Controller
             'description'=>$request->description,
             'created_at'=>Carbon::now()
         ]);
-        return redirect()->route('admin.service')->with('success','Service Inserted Successfully');
+        $notification = array(
+            'message'=>'Service Inserted Successfully',
+            'alert-type'=>'success'
+        );
+        return redirect()->route('admin.service')->with($notification);
     }
     public function edit($id){
         $service = Service::find($id);
@@ -47,10 +51,18 @@ class ServiceController extends Controller
         'description' => $request->description,
         'created_at'=>Carbon::now()
         ]);
-        return redirect()->route('admin.service')->with('success','Service Updated Successfully');
+        $notification = array(
+            'message'=>'Service Updated Successfully',
+            'alert-type'=>'info'
+        );
+        return redirect()->route('admin.service')->with($notification);
     }
     public function delete($id){
         Service::find($id)->delete();
-        return redirect()->route('admin.service')->with('success','Service Deleted Successfully');
+        $notification = array(
+            'message'=>'Service Deleted Successfully',
+            'alert-type'=>'warning'
+        );
+        return redirect()->route('admin.service')->with($notification);
     }
 }

@@ -41,7 +41,11 @@ class PortfolioController extends Controller
             'project_type'=>$request->project_type,
             'created_at'=> Carbon::now()
         ]);
-        return redirect()->route('admin.portfolio')->with('success','Portfolio Insert Successfully');
+        $notification = array(
+            'message'=>'Portfolio Insert Successfully',
+            'alert-type'=>'success'
+        );
+        return redirect()->route('admin.portfolio')->with($notification);
     }
     public function edit($id){
         $portfolio = Portfolio::find($id);
@@ -77,7 +81,11 @@ class PortfolioController extends Controller
         $portfolio->project_type = $request->project_type;
         $portfolio->updated_at = Carbon::now();
         $portfolio->save();
-        return redirect()->route('admin.portfolio')->with('success','Portfolio Update Successfully');
+        $notification = array(
+            'message'=>'Portfolio Update Successfully',
+            'alert-type'=>'info'
+        );
+        return redirect()->route('admin.portfolio')->with($notification);
     }
     public function delete($id){
         $portfolio = Portfolio::find($id);
@@ -85,6 +93,10 @@ class PortfolioController extends Controller
             File::delete($portfolio->image);
         }
         $portfolio->delete();
-        return redirect()->route('admin.portfolio')->with('success','Portfolio Delete Successfully');
+        $notification = array(
+            'message'=>'Portfolio Delete Successfully',
+            'alert-type'=>'warning'
+        );
+        return redirect()->route('admin.portfolio')->with($notification);
     }
 }

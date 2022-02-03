@@ -37,7 +37,11 @@ class SliderController extends Controller
             'image'=>$path.$img_name,
             'created_at'=>Carbon::now()
         ]);
-        return redirect()->route('admin.slider')->with('success','Slider Inserted Successfully');
+        $notification = array(
+            'message'=>'Slider Inserted Successfully',
+            'alert-type'=>'success'
+        );
+        return redirect()->route('admin.slider')->with($notification);
     }
     public function edit($id){
         $slider = Slider::find($id);
@@ -63,7 +67,11 @@ class SliderController extends Controller
             $slider->image = $path.$img_name;
         }
         $slider->save();
-        return redirect()->route('admin.slider')->with('success','Slider Updated Successfully');
+        $notification = array(
+            'message'=>'Slider Updated Successfully',
+            'alert-type'=>'info'
+        );
+        return redirect()->route('admin.slider')->with($notification);
     }
     public function delete($id){
         $slider = Slider::find($id);
@@ -71,6 +79,10 @@ class SliderController extends Controller
             File::delete($slider->image);
         }
         $slider->delete();
-        return redirect()->route('admin.slider')->with('success','Slider Deleted Successfully');
+        $notification = array(
+            'message'=>'Slider Deleted Successfully',
+            'alert-type'=>'warning'
+        );
+        return redirect()->route('admin.slider')->with($notification);
     }
 }

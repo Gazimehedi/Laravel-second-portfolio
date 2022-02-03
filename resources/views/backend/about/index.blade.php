@@ -2,14 +2,6 @@
 @section('content')
 <div class="row">
     <div class="col-lg-8">
-        @if (session()->has('success'))
-        <div class="alert alert-dismissible fade show alert-success" role="alert">
-            {{session('success')}}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">×</span>
-            </button>
-        </div>
-        @endif
         <div class="card card-default">
             <div class="card-header card-header-border-bottom">
                 <h2>Manage About</h2>

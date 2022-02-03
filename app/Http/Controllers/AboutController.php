@@ -21,6 +21,10 @@ class AboutController extends Controller
             'long_desc'=>$request->long_desc,
             'updated_at'=> Carbon::now()
         ]);
-        return redirect()->route('admin.about')->with('success','About Updated Successfully');
+        $notification = array(
+            'message'=>'About Updated Successfully',
+            'alert-type'=>'info'
+        );
+        return redirect()->route('admin.about')->with($notification);
     }
 }

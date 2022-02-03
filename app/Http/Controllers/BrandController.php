@@ -26,7 +26,11 @@ class BrandController extends Controller
         $image = $path.$file_name;
         $img->move($path,$file_name);
         Brand::create(compact('name','image'));
-        return redirect()->route('admin.brand')->with('success','Brand Insert Successfully');
+        $notification = array(
+            'message'=>'Brand Insert Successfully',
+            'alert-type'=>'success'
+        );
+        return redirect()->route('admin.brand')->with($notification);
     }
     public function edit($id){
         $brand = Brand::find($id);
@@ -52,7 +56,11 @@ class BrandController extends Controller
             $brand->image = $image;
         }
         $brand->save();
-        return redirect()->route('admin.brand')->with('success','Brand Update Successfully');
+        $notification = array(
+            'message'=>'Brand Update Successfully',
+            'alert-type'=>'info'
+        );
+        return redirect()->route('admin.brand')->with($notification);
     }
     public function delete($id){
         $brand = Brand::find($id);
@@ -60,7 +68,11 @@ class BrandController extends Controller
             File::delete($brand->image);
         }
         $brand->delete();
-        return redirect()->route('admin.brand')->with('success','Brand Delete Successfully');
+        $notification = array(
+            'message'=>'Brand Delete Successfully',
+            'alert-type'=>'warning'
+        );
+        return redirect()->route('admin.brand')->with($notification);
     }
 
 }

@@ -22,7 +22,11 @@ class ContactController extends Controller
             'phone'=>$request->phone,
             'updated_at'=> Carbon::now()
         ]);
-        return redirect()->route('admin.contact.profile')->with('success','Contact Profile Updated Successfully');
+        $notification = array(
+            'message'=>'Contact Profile Updated Successfully',
+            'alert-type'=>'info'
+        );
+        return redirect()->route('admin.contact.profile')->with($notification);
     }
     public function message(){
         $messages = ContactMessage::latest()->get();
@@ -30,6 +34,10 @@ class ContactController extends Controller
     }
     public function messagedelete($id){
         ContactMessage::findOrFail($id)->delete();
-        return redirect()->route('admin.contact.message')->with('success','Contact Message Deleted Successfully');
+        $notification = array(
+            'message'=>'Contact Message Deleted Successfully',
+            'alert-type'=>'warning'
+        );
+        return redirect()->route('admin.contact.message')->with($notification);
     }
 }

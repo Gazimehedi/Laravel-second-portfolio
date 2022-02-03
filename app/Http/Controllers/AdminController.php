@@ -11,7 +11,11 @@ class AdminController extends Controller
 {
     public function logout(){
         Auth::logout();
-        return redirect()->route('login')->with('success','User Logout');
+        $notification = array(
+            'message'=>'User Logout',
+            'alert-type'=>'success'
+        );
+        return redirect()->route('login')->with($notification);
     }
     public function passwordreset(){
         return view('backend.resetpassword.resetpassword');
@@ -27,9 +31,17 @@ class AdminController extends Controller
             $user->password = Hash::make($request->password);
             $user->save();
             Auth::logout();
-            return redirect()->route('login')->with('success','User Password Changed');
+            $notification = array(
+                'message'=>'User Password Changed',
+                'alert-type'=>'info'
+            );
+            return redirect()->route('login')->with($notification);
         }else{
-            return redirect()->route('user.password.reset')->with('warning','Your password is wrong!');
+            $notification = array(
+                'message'=>'Your password is wrong!',
+                'alert-type'=>'error'
+            );
+            return redirect()->route('user.password.reset')->with($notification);
         }
     }
     public function profile(){
@@ -37,7 +49,7 @@ class AdminController extends Controller
     }
     public function profileupdate(Request $request){
         $request->validate([
-            'image'=>'required|image|mimes:png,jpg,jpeg',
+            'image'=>'image|mimes:png,jpg,jpeg',
             'name'=>'required',
             'email'=>'required|email'
         ]);
@@ -54,6 +66,11 @@ class AdminController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->save();
-        return redirect()->route('user.profile')->with('success','Your Profile Is Updated!');
+
+        $notification = array(
+            'message'=>'Your Profile Is Updated!',
+            'alert-type'=>'info'
+        );
+        return redirect()->route('user.profile')->with($notification);
     }
 }

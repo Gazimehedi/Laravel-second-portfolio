@@ -2,14 +2,6 @@
 @section('content')
 <div class="row">
     <div class="col-lg-12">
-        @if (session()->has('success'))
-        <div class="alert alert-dismissible fade show alert-success" role="alert">
-            {{session('success')}}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">×</span>
-            </button>
-        </div>
-        @endif
         <div class="card card-default">
             <div class="card-header card-header-border-bottom">
                 <h2>Manage Profile</h2>
@@ -23,7 +15,10 @@
                             <br>
                         @endif
                         <label for="image">Profile Photo</label>
-                        <input type="file" id="image" name="image" class="form-control-file" required>
+                        <input type="file" id="image" name="image" class="form-control-file">
+                        @error('image')
+                            <span class="mt-2 d-block text-danger">{{$message}}</span>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="name">Name</label>

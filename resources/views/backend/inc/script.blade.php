@@ -23,3 +23,14 @@
     <script src="{{ asset('backend/assets/js/date-range.js') }}"></script>
     <script src="{{ asset('backend/assets/js/map.js') }}"></script>
     <script src="{{ asset('backend/assets/js/custom.js') }}"></script>
+    <script>
+        @if(Session::get('alert-type') == "success")
+            toastr.success("{{ Session::get('message') }}");
+        @elseif(Session::get('alert-type') == "info")
+            toastr.info("{{ Session::get('message') }}");
+        @elseif(Session::get('alert-type') == "warning")
+            toastr.warning("{{ Session::get('message') }}");
+        @elseif(Session::get('alert-type') == "error")
+            toastr.error("{{ Session::get('message') }}");
+        @endif
+    </script>
